@@ -33,7 +33,11 @@ class Movie {
 };
 
 int main () {
-    
+    // srand(time(0)); //setting seed value for rand()
+    // double n = rand() % (MAX - MIN + 1) + MIN;
+    // cout << n;
+    double n = stod("1.9");
+    cout << n;
 
     return 0;
 }
