@@ -29,7 +29,7 @@ class Movie {
 
     public:
     //Movie constructor
-    Movie(string str) {this->title = str;}
+    Movie(string str) {this->title = str, reviews = nullptr;}
     //getters and setters
     string getTitle() const {return this->title;}
     Node* getReviews() const {return this->reviews;}
@@ -56,7 +56,8 @@ int main () {
     //populate each movie in movies with reviews
     ifstream fin("reviews.txt");
     if (fin.good( )) {
-        for (Movie m : movies) {
+        //pass by reference to change movies container itself
+        for (Movie &m : movies) {
             Node *head = nullptr;
             for (int i = 0; i < NUM_REVIEWS; ++i) {
                 double reviewRating = (rand() % (MAX - MIN + 1) + MIN) / TENTH_MOD;
@@ -64,6 +65,7 @@ int main () {
                 getline(fin, reviewComment);
                 addAtHead(head, reviewRating, reviewComment);
             }
+            m.setReviews(head);
         }
         fin.close( );
     }
@@ -72,17 +74,16 @@ int main () {
         return 1;
     }
     cout << "Outputting movie reviews: " << endl;
-    for (Movie m : movies) {
+    //pass by constant reference because it's a complex object
+    for (const Movie &m : movies) {
         cout << "Movie: " << m.getTitle() << endl;
         Node *head = m.getReviews();
         output(head);
     }
-
     return 0;
 }
 
-//description: addAtHead() adds nodes with a rating and comment to
-//each movie in a vector of linked lists
+//description: addAtHead() adds a node with a rating and comment to a linked list
 //arguments: a pointer to the head of a linked list passed by reference, a
 //double reviewRating, and a string revieComment
 //returns: void
