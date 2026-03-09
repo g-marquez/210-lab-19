@@ -39,6 +39,7 @@ class Movie {
 
 void addAtHead(Node *&, double, string);
 void output(Node *);
+void deleteList(Node *&); //to delete dynamically allocated memory
 
 int main () {
     srand(time(0)); //setting seed value for rand()
@@ -81,6 +82,15 @@ int main () {
         Node *head = m.getReviews();
         output(head);
     }
+
+    //delete dynamically allocated memory in linked lists
+    cout << "Deleting dynamically allocated memory in all lists..." << endl;
+    for (const Movie &m : movies) {
+        Node *head = m.getReviews();
+        deleteList(head);
+        m.setReviews(nullptr);
+    }
+    cout << "Deletion complete!" << endl;
     return 0;
 }
 
@@ -128,4 +138,17 @@ void output(Node *head) {
     cout << "\t> Average: " << fixed << setprecision(1)
          << sumRatings/count << endl;
     cout << endl;
+}
+
+//description: deleteList() deletes an entire linked list
+//arguments: a pointer to the head of a linked list passed by reference
+//returns: void
+void deleteList (Node *&head) {
+    Node *current = head;
+    while (current) {
+        head = current->next;
+        delete current;
+        current = head;
+    }
+    head = nullptr;
 }
