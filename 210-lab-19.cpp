@@ -25,19 +25,20 @@ struct Node {
 
 class Movie {
     string title;
-    Node reviews;
+    Node *reviews;
 
     public:
     //Movie constructor
     Movie(string str) {this->title = str;}
     //getters and setters
     string getTitle() const {return this->title;}
-    Node getReviews() const {return this->reviews;}
+    Node* getReviews() const {return this->reviews;}
     void setTitle(string str) {this->title = str;}
-    void setReviews(Node r) {this->reviews = r;}
+    void setReviews(Node *r) {this->reviews = r;}
 };
 
 void addAtHead(Node *&, double, string);
+void output(Node *);
 
 int main () {
     srand(time(0)); //setting seed value for rand()
@@ -70,6 +71,12 @@ int main () {
         cout << "ERROR! Please verify file name/directory and restart program.";
         return 1;
     }
+    cout << "Outputting movie reviews: " << endl;
+    for (Movie m : movies) {
+        cout << "Movie: " << m.getTitle() << endl;
+        Node *head = m.getReviews();
+        output(head);
+    }
 
     return 0;
 }
@@ -94,4 +101,28 @@ void addAtHead(Node *&head, double reviewRating, string reviewComment) {
         newReview->comment = reviewComment;
         head = newReview;
     }
+}
+
+//description: output() outputs the contents of a linked list and the average 
+//rating from all reviews to the console
+//arguments: a pointer to the head of a linked list
+//returns: void
+void output(Node *head) {
+    cout << "Outputting all reviews:" << endl;
+    if (!head) {
+        cout << "\t> Empty list.\n";
+        return;
+    }
+    int count = 0;
+    double sumRatings = 0;
+    Node *current = head;
+    while (current) {
+        cout << "\t> Review #" << count + 1 << ": " << current->rating
+             << ": " << current->comment << endl;
+        sumRatings += current->rating;
+        current = current->next;
+        count++;
+    }
+    cout << "\t> Average: " << sumRatings/count << endl;
+    cout << endl;
 }
