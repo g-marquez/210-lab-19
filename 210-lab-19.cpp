@@ -10,11 +10,11 @@
 #include <vector>
 #include <random>
 #include <fstream>
+#include <iomanip>
 using namespace std;
 
-const int NUM_MOVIES = 4, NUM_REVIEWS = 3;
-//for random ratings
-const int MAX = 50, MIN = 10;
+const int NUM_REVIEWS = 3;
+const int MAX = 50, MIN = 10; //for random ratings generation
 const double TENTH_MOD = 10;
 
 struct Node {
@@ -43,6 +43,7 @@ void output(Node *);
 int main () {
     srand(time(0)); //setting seed value for rand()
     vector<Movie> movies; //create empty vector of Movie objects
+
     //create individual Movie instances and push into movies vector
     Movie movie1("Movie 1");
     movies.push_back(movie1);
@@ -53,7 +54,7 @@ int main () {
     Movie movie4("Movie 4");
     movies.push_back(movie4);
 
-    //populate each movie in movies with reviews
+    //populate each movie in movies with reviews via file input
     ifstream fin("reviews.txt");
     if (fin.good( )) {
         //pass by reference to change movies container itself
@@ -65,7 +66,7 @@ int main () {
                 getline(fin, reviewComment);
                 addAtHead(head, reviewRating, reviewComment);
             }
-            m.setReviews(head);
+            m.setReviews(head); //set reviews to this specific movie
         }
         fin.close( );
     }
@@ -85,7 +86,7 @@ int main () {
 
 //description: addAtHead() adds a node with a rating and comment to a linked list
 //arguments: a pointer to the head of a linked list passed by reference, a
-//double reviewRating, and a string revieComment
+//double reviewRating, and a string reviewComment
 //returns: void
 void addAtHead(Node *&head, double reviewRating, string reviewComment) {
     //create new Node and populate with rating and comment
@@ -124,6 +125,7 @@ void output(Node *head) {
         current = current->next;
         count++;
     }
-    cout << "\t> Average: " << sumRatings/count << endl;
+    cout << "\t> Average: " << fixed << setprecision(1)
+         << sumRatings/count << endl;
     cout << endl;
 }
