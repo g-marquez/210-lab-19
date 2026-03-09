@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <fstream>
 using namespace std;
 
 const int NUM_MOVIES = 4, NUM_REVIEWS = 3;
@@ -48,7 +49,20 @@ int main () {
     movies.push_back(movie3);
     Movie movie4("Movie 4");
     movies.push_back(movie4);
-    
+
+    //populate each movie in movies with reviews
+    ifstream fin("reviews.txt");
+    if (fin.good( )) {
+        for (Movie m : movies) {
+            Node *head = nullptr;
+        }
+
+        fin.close( );
+    }
+    else {
+        cout << "ERROR! Please verify file name/directory and restart program.";
+        return 1;
+    }
     double n = (rand() % (MAX - MIN + 1) + MIN) / TENTH_MOD;
     
 
