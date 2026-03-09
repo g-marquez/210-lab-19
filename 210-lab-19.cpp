@@ -12,7 +12,9 @@
 using namespace std;
 
 const int NUM_MOVIES = 4, NUM_REVIEWS = 3;
-const int MAX = 5, MIN = 1, TENTH_MOD = 10; //for random ratings
+//for random ratings
+const int MAX = 50, MIN = 10;
+const double TENTH_MOD = 10;
 
 struct Node {
     double rating;
@@ -32,24 +34,10 @@ class Movie {
     void setReviews(Node r) {this->reviews = r;}
 };
 
-double getRandRating();
-
 int main () {
+    double n = (rand() % (MAX - MIN + 1) + MIN) / TENTH_MOD;
     
     
 
     return 0;
-}
-
-double getRandRating() {
-    srand(time(0)); //setting seed value for rand()
-    int n = rand() % (MAX - MIN + 1) + MIN; //value 1-5 for whole number
-    int t = rand() % TENTH_MOD; //value 0-9 for tenth place
-    //convert random ints to strings
-    string nString = to_string(n);
-    string tString = to_string(t);
-    //concatenate strings together and convert to double
-    string full = nString + "." + tString;
-    double randN = stod(full);
-    return randN;
 }
