@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <random>
 using namespace std;
 
 const int NUM_MOVIES = 4, NUM_REVIEWS = 3;
@@ -23,5 +25,15 @@ class Movie {
     Node reviews;
 
     public:
-
+    //getters and setters
+    string getTitle() const {return this->title;}
+    Node getReviews() const {return this->reviews;}
+    void setTitle(string str) {this->title = str;}
+    void setReviews(Node r) {this->reviews = r;}
 };
+
+int main () {
+    
+
+    return 0;
+}
