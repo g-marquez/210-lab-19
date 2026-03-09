@@ -12,7 +12,7 @@
 using namespace std;
 
 const int NUM_MOVIES = 4, NUM_REVIEWS = 3;
-const double MAX = 5.0, MIN = 1.0;
+const int MAX = 5, MIN = 1, TENTH_MAX = 9; //for random ratings
 
 struct Node {
     double rating;
@@ -34,10 +34,13 @@ class Movie {
 
 int main () {
     // srand(time(0)); //setting seed value for rand()
-    // double n = rand() % (MAX - MIN + 1) + MIN;
+    int n = rand() % (MAX - MIN + 1) + MIN;
+    int t = rand() % TENTH_MAX;
+    string nString = to_string(n);
+    string tString = to_string(t);
+    randN = stod()
     // cout << n;
-    double n = stod("1.9");
-    cout << n;
+    
 
     return 0;
 }
