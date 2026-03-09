@@ -55,6 +55,9 @@ int main () {
     if (fin.good( )) {
         for (Movie m : movies) {
             Node *head = nullptr;
+            for (int i = 0, i < NUM_REVIEWS, ++i) {
+
+            }
         }
 
         fin.close( );
@@ -67,4 +70,43 @@ int main () {
     
 
     return 0;
+}
+
+//description: addAtHead() adds a node with a rating and comment entered by the
+//user to the head of a linked list
+//arguments: a pointer to the head of a linked list passed by reference
+//returns: void
+void addAtHead(Node *&head) {
+    double reviewRating;
+    string reviewComment;
+    ifstream fin("reviews.txt");
+    if (fin.good( )) {
+        for (Movie m : movies) {
+            Node *head = nullptr;
+            for (int i = 0, i < NUM_REVIEWS, ++i) {
+
+            }
+        }
+
+        fin.close( );
+    }
+    else {
+        cout << "ERROR! Please verify file name/directory and restart program.";
+        return 1;
+    }
+
+    //create new Node and populate with rating and comment
+    Node *newReview = new Node; 
+    if (!head) {
+        head = newReview;
+        newReview->next = nullptr;
+        newReview->rating = reviewRating;
+        newReview->comment = reviewComment;
+    }
+    else {
+        newReview->next = head;
+        newReview->rating = reviewRating;
+        newReview->comment = reviewComment;
+        head = newReview;
+    }
 }
