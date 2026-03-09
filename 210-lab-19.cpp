@@ -76,7 +76,7 @@ int main () {
         return 1;
     }
     cout << "Outputting movie reviews: " << endl;
-    //pass by constant reference because it's a complex object
+    //pass by constant reference because it's a complex object that won't change
     for (const Movie &m : movies) {
         cout << "Movie: " << m.getTitle() << endl;
         Node *head = m.getReviews();
@@ -85,10 +85,11 @@ int main () {
 
     //delete dynamically allocated memory in linked lists
     cout << "Deleting dynamically allocated memory in all lists..." << endl;
-    for (const Movie &m : movies) {
+    //remove const here since I'm deleting dynamically allocated memory
+    for (Movie &m : movies) {
         Node *head = m.getReviews();
         deleteList(head);
-        m.setReviews(nullptr);
+        m.setReviews(nullptr); //to avoid dangling pointers
     }
     cout << "Deletion complete!" << endl;
     return 0;
