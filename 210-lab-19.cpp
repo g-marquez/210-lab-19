@@ -27,6 +27,8 @@ class Movie {
     Node reviews;
 
     public:
+    //Movie constructor
+    Movie(string str) {this->title = str;}
     //getters and setters
     string getTitle() const {return this->title;}
     Node getReviews() const {return this->reviews;}
@@ -35,8 +37,19 @@ class Movie {
 };
 
 int main () {
-    double n = (rand() % (MAX - MIN + 1) + MIN) / TENTH_MOD;
+    srand(time(0)); //setting seed value for rand()
+    vector<Movie> movies; //create empty vector of Movie objects
+    //create individual Movie instances and push into movies vector
+    Movie movie1("Movie 1");
+    movies.push_back(movie1);
+    Movie movie2("Movie 2");
+    movies.push_back(movie2);
+    Movie movie3("Movie 3");
+    movies.push_back(movie3);
+    Movie movie4("Movie 4");
+    movies.push_back(movie4);
     
+    double n = (rand() % (MAX - MIN + 1) + MIN) / TENTH_MOD;
     
 
     return 0;
