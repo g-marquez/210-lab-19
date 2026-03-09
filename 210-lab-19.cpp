@@ -63,13 +63,12 @@ int main () {
                 getline(fin, reviewComment);
                 addAtHead(head, reviewRating, reviewComment);
             }
-    }
-
+        }
         fin.close( );
     }
     else {
         cout << "ERROR! Please verify file name/directory and restart program.";
-        return;
+        return 1;
     }
 
     return 0;
@@ -78,7 +77,7 @@ int main () {
 //description: addAtHead() adds nodes with a rating and comment to
 //each movie in a vector of linked lists
 //arguments: a pointer to the head of a linked list passed by reference, a
-//vector of movie objects
+//double reviewRating, and a string revieComment
 //returns: void
 void addAtHead(Node *&head, double reviewRating, string reviewComment) {
     //create new Node and populate with rating and comment
