@@ -37,7 +37,7 @@ class Movie {
     void setReviews(Node r) {this->reviews = r;}
 };
 
-void addAtHead(Node *&, vector<Movie>);
+void addAtHead(Node *&, double, string);
 
 int main () {
     srand(time(0)); //setting seed value for rand()
@@ -58,15 +58,18 @@ int main () {
         for (Movie m : movies) {
             Node *head = nullptr;
             for (int i = 0; i < NUM_REVIEWS; ++i) {
-
+                double reviewRating = (rand() % (MAX - MIN + 1) + MIN) / TENTH_MOD;
+                string reviewComment;
+                getline(fin, reviewComment);
+                addAtHead(head, reviewRating, reviewComment);
             }
-        }
+    }
 
         fin.close( );
     }
     else {
         cout << "ERROR! Please verify file name/directory and restart program.";
-        return 1;
+        return;
     }
 
     return 0;
@@ -77,25 +80,7 @@ int main () {
 //arguments: a pointer to the head of a linked list passed by reference, a
 //vector of movie objects
 //returns: void
-void addAtHead(Node *&head, vector<Movie> movies) {
-    double reviewRating = (rand() % (MAX - MIN + 1) + MIN) / TENTH_MOD;
-    string reviewComment;
-    ifstream fin("reviews.txt");
-    if (fin.good( )) {
-        for (Movie m : movies) {
-            Node *head = nullptr;
-            for (int i = 0; i < NUM_REVIEWS; ++i) {
-
-            }
-        }
-
-        fin.close( );
-    }
-    else {
-        cout << "ERROR! Please verify file name/directory and restart program.";
-        return;
-    }
-
+void addAtHead(Node *&head, double reviewRating, string reviewComment) {
     //create new Node and populate with rating and comment
     Node *newReview = new Node; 
     if (!head) {
